@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'profile' %}
+
+{% block main %}
+
+    <div>
+        <h2>User Information: </h2>
+        Email: {{ user.email }}
+        <br>
+        FullName: {{ user.fullName }}
+        <p>Total Transactions: <strong>{{ orders|length }}</strong></p>
+        <p>Total Money Spend: <strong>${{ total|number_format(2, '.', ',') }}</strong></p>
+    </div>
+
+    <hr/>
+
+    <h2>Shopping Cart Transactions: {#<span class="glyphicon glyphicon-shopping-cart"></span>#}</h2>
+
+    <hr/>
+
+    {% for order in orders %}
+        <h4>Product Name: {{ order.product.name }}</h4>
+        <p>Price: <strong>${{ order.product.price|number_format(2, '.', ',') }}</strong></p>
+        <p>Status: <strong>Completed</strong></p>
+
+        <strong>
+            <small style="float: right">{{ order.dateAdded is empty ? "" : order.dateAdded|date("F jS Y \\a\\t g:ia") }}</small>
+        </strong>
+        <br/>
+        <hr/>
+
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-12">
+                <article>
+                    <header>
+                        <h2>{{ product.name }}</h2>
+                    </header>
+
+                    <img src="{{ product.pictureUrl }}" width="400px" height="200px" />
+
+                    <p>
+                        {{ product.content }}
+                    </p>
+
+                    <p>Price: <strong>${{ product.price }}</strong></p>
+
+                    <p>DateAdded: {{ product.dateAdded is empty ? "" : product.dateAdded|date("m/d/Y", "Europe/Paris" ) }}</p>
+
+                    <small class="author">
+                        {{ product.author }}
+                    </small>
+
+                    <footer>
+                        <div class="pull-right">
+                            {% if app.getUser() and (not app.getUser().author(product) or app.getUser().isAdmin()) %}
+                            <a class="btn btn-success btn-xs" href="{{ path('add_to_cart', {'id': product.id}) }}">Add To Cart &raquo;</a>
+                            {% endif %}
+
+                            {% if app.getUser() and app.getUser().isAdmin() or app.getUser() and app.getUser().author(product) %}
+                            <a class="btn btn-primary btn-xs" href="{{ path('product_edit', {'id': product.id}) }}">edit &raquo;</a>
+                            <a class="btn btn-danger btn-xs" href="{{ path('product_delete', {'id': product.id}) }}">remove &raquo;</a>
+                            {% endif %}
+
+                            <a class="btn btn-default btn-xs" href="{{ path('home_index') }}">back &raquo;</a>
+
+                        </div>
+                    </footer>
+                </article>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

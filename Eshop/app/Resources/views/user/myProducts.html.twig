@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+    <h3><u>Your Products</u>: <strong>{{ products|length }}</strong></h3>
+
+    <div class="container body-content">
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-6">
+                    <article>
+                        <header>
+                            <h2>{{ product.name }}</h2>
+                        </header>
+
+                        <a href="{{ path('product_details', {'id': product.id} ) }}" ><img src="{{ product.pictureUrl }}" width="400px" height="200px"/></a>
+
+                        <p>Price: ${{ product.price|number_format(2, '.', ',') }}</p>
+
+                        <p>
+                            {{ product.content }}
+                        </p>
+
+                        <footer>
+                            <div class="pull-right">
+                                <a class="btn btn-default btn-xs" href="{{ path('home_index') }}">back &raquo;</a>
+                                <a class="btn btn-success btn-xs" href="{{ path('product_edit', {'id': product.id}) }}">edit &raquo;</a>
+                                <a class="btn btn-danger btn-xs" href="{{ path('product_delete', {'id': product.id}) }}">remove &raquo;</a>
+                            </div>
+                        </footer>
+                    </article>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}
+
+
+

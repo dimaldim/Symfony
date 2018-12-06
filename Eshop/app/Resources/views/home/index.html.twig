@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="container body-content">
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-3">
+                    <article>
+                        <header>
+                            <h2>{{ product.name }}</h2>
+                        </header>
+
+                        <a href="{{ path('product_details', {id: product.id}) }}"><img src="{{ product.pictureUrl }}" width="150px" height="150px"/></a>
+
+                        <p>Price: <strong>${{ product.price|number_format(2, '.', ',') }}</strong></p>
+
+                        <p>
+                            DateAdded: {{ product.dateAdded is empty ? "" : product.dateAdded|date("m/d/Y", "Europe/Paris" ) }}</p>
+
+                        <p>Views: {{ product.viewCount }}</p>
+
+                        <small class="author">
+                            {{ product.author }}
+                        </small>
+
+                        <footer>
+                            <div class="pull-right">
+                                <a class="btn btn-default btn-xs"
+                                   href="{{ path('product_details', {id: product.id}) }}">Read more &raquo;</a>
+                            </div>
+                        </footer>
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

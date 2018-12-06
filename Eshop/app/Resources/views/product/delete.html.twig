@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" method="POST">
+                <fieldset>
+                    <legend>Delete Product</legend>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="product_name">Name</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" id="product_name" placeholder="Product Name"
+                                   name="product[name]" value="{{ product.name }}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="product_content">Content</label>
+                        <div class="col-sm-6">
+                        <textarea class="form-control" rows="6" id="product_content"
+                                  name="product[content]" readonly>{{ product.content }}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="product_price">Price</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" id="product_price" placeholder="price"
+                                   name="product[price]" value="{{ product.price }}" readonly>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="product_image">Image Url</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" id="product_image" placeholder="image"
+                                   name="product[pictureUrl]" value="{{ product.pictureUrl }}" readonly>
+                        </div>
+                    </div>
+
+                    {{ form_row(form._token) }}
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" href="{{ path('home_index') }}">Cancel</a>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
